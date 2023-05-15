@@ -198,7 +198,6 @@ export const StyledBackButton = styled.button`
   border: none;
   cursor: pointer;
   transition: 0.3s;
-  /* margin-right: 2rem; */
   &:hover{
     background: ${RegularTextColor};
     color: ${MainColor};

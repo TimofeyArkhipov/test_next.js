@@ -1,14 +1,13 @@
-import React from 'react'
 import { StepBlock, StepPoint, StepLine } from '@/style-components/ProgressSection'
 
 export default function Step({step, title, progress, stepsLength }) {
-  const activeStep = step===progress;
+  const activestep = step === progress;
   const currentStep = progress >= step + 1 ? 'completed' : 'incomplete';
   const currentLine = progress - 1 >= step ? 'completed' : 'incomplete';
 
   return (
     <>
-        <StepBlock  step={currentStep} active={activeStep}>
+        <StepBlock  step={currentStep} $activestep={activestep}>
             <StepPoint  step={currentStep} />
             <p>{title}</p>
             </StepBlock>

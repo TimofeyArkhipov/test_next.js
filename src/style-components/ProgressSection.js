@@ -37,7 +37,7 @@ export const ProgressSection = styled.div`
 export const StepBlock = styled.div`
     display: flex;
     align-items: center;
-    opacity: ${({step, active}) => step === 'completed' || active ? '1' : '0.5'};
+    opacity: ${({step, $activestep}) => step === 'completed' || $activestep ? '1' : '0.5'};
     p{
         font-size: 14px;
         color: ${({ step }) => (step === 'completed' ? TitleTextColor : RegularTextColor)};
@@ -66,7 +66,6 @@ export const StepLine = styled.div`
     width: 1px;
     height: 25px;
     background:  ${({ step }) => (step === 'completed' ? TitleTextColor : RegularTextColor)};
-    /* background: ${props => props.step>=2 }; */
     margin: 6px 0px 6px 4px;
     @media (max-width:500px) {
         height: 1px;

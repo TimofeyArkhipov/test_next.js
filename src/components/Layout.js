@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import ProgressSteps from './ProgressBar'
 import { Wrapper } from '@/style-components/MainSection'
 import { StyledMain } from '@/style-components/MainSection'

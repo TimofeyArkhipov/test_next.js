@@ -2,7 +2,6 @@ import {useState, useContext, useEffect} from 'react'
 import { useRouter } from 'next/router';
 import { DataContext } from '@/context/dataContext';
 
-
 import { 
   StyledMainSectionContainer, 
   StyledParagraphTitle, 
@@ -14,12 +13,8 @@ import {
   StyledRadioButtonsSecionInputSectionMain,
   StyledButtonCreate,
   StyledErrorMessage,
-
 } from '@/style-components/MainSection';
 import ErrorMessage from './ErrorMessage';
-
-
-
 
 export default function CreateProjectStepOne() {
  

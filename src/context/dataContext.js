@@ -6,7 +6,7 @@ export default function DataProvider({children}) {
 
     const [progress, setProgress] = useState(1);
     const [projectName, setProjectName] = useState('')
-    const [projectUrl, setProjectUrl] = useState('')
+    const [projectUrl, setProjectUrl] = useState('Alphaguilty.io/')
     const [projectCategory, setProjectCategory] = useState(null);
     const [projectGoal, setProjectGoal] = useState(null);
     const [amountOfPeople, setAmountOfPeople] = useState(0)

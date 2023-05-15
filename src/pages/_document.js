@@ -1,6 +1,4 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import { Wrapper } from '@/style-components/MainSection'
-
 
 export default function Document() {
   return (
