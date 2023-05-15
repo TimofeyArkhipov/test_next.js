@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-const MainColor = '#101313'
-const TitleTextColor = '#2B8CE5';
-const RegularTextColor = '#fff'
-const ButtonColor = '#2B8CE5';
-const Black = '#000';
+export const MainColor = '#101313'
+export const TitleTextColor = '#2B8CE5';
+export const RegularTextColor = '#fff'
+export const ButtonColor = '#2B8CE5';
+export const Black = '#000';
 
 export const Wrapper = styled.div`
  font-family: 'Space Grotesk';
@@ -32,7 +32,7 @@ export const StyledMainSectionContainer = styled.div`
   }
 `
 
-export const StyledPTitle = styled.p`
+export const StyledParagraphTitle = styled.p`
   font-size: 20px;
   font-weight: 300;
   line-height: 24px;
@@ -43,14 +43,14 @@ export const StyledPTitle = styled.p`
   }
 `
 
-export const StyledH1Title = styled.h1`
+export const StyledTitle = styled.h1`
   font-size: 32px;
   font-weight: 400;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
 `
 
-export const StyledP = styled.p`
+export const StyledParagraph = styled.p`
  font-size: 1rem;
  font-weight: 300;
  margin-top: 1.7rem;
@@ -78,12 +78,12 @@ export const StyledInputText = styled.input.attrs(
   }
 `;
 
-export const StyledRadioButtonsList = styled.div`
+export const StyledRadioButtonsListMain = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
 
-export const StyledRadioButtonsLabelSection1 = styled.label`
+export const StyledRadioButtonsLabelSectionMain = styled.label`
   span{
     display: block;
     color: ${RegularTextColor};
@@ -98,14 +98,14 @@ export const StyledRadioButtonsLabelSection1 = styled.label`
   }
  
 `
-export const StyledRadioButtonsSecionInputSection1 = styled.input.attrs({type:'radio'})`
+export const StyledRadioButtonsSecionInputSectionMain = styled.input.attrs({type:'radio'})`
   visibility: hidden;
   margin-left: -10px;
   &:checked ~ span{
-    background: rgba(41,140,229, 0.5);
+    background: rgba(15,26,39, 1);
     padding: 6px 12px;
     border-radius: 10px;
-    color: ${RegularTextColor };
+    color: ${ButtonColor};
   }
 
 `
@@ -130,12 +130,12 @@ export const StyledButtonCreate = styled.button`
 
 `
 
-export const StyledRadioButtonsList2 = styled.div`
+export const StyledRadioButtonsListSecondary = styled.div`
   display: flex;
   flex-direction: column;
 `
 
-export const StyledRadioButtonsLabelSection2 = styled.label`
+export const StyledRadioButtonsLabelSectionSecondary = styled.label`
 
   color: ${RegularTextColor};
   font-size: 16px;
@@ -170,7 +170,7 @@ export const StyledCustomSpan = styled.span`
   }
 `
 
-export const StyledRadioButtonsSecionInputSection2 = styled.input.attrs({type:'radio'})`
+export const StyledRadioButtonsSecionInputSectionSecondary = styled.input.attrs({type:'radio'})`
   visibility: hidden; 
   &:checked + span:after {
   opacity: 1;
@@ -268,4 +268,12 @@ export const StyledInputNumber = styled.input.attrs(
 
 export const StypelResultText = styled.p`
   margin-bottom: 2rem;
+`
+
+
+export const StyledErrorMessage = styled.div`
+  p{
+    font-size: 14px;
+    color: red;
+  }
 `

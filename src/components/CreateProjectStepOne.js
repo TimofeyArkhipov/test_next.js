@@ -1,24 +1,30 @@
 import {useState, useContext, useEffect} from 'react'
 import { useRouter } from 'next/router';
 import { DataContext } from '@/context/dataContext';
+
+
 import { 
   StyledMainSectionContainer, 
-  StyledPTitle, 
-  StyledH1Title, 
-  StyledP, 
+  StyledParagraphTitle, 
+  StyledTitle, 
+  StyledParagraph, 
   StyledInputText, 
-  StyledRadioButtonsList, 
-  StyledRadioButtonsLabelSection1, 
-  StyledRadioButtonsSecionInputSection1,
+  StyledRadioButtonsListMain, 
+  StyledRadioButtonsLabelSectionMain, 
+  StyledRadioButtonsSecionInputSectionMain,
   StyledButtonCreate,
+  StyledErrorMessage,
 
 } from '@/style-components/MainSection';
+import ErrorMessage from './ErrorMessage';
 
 
 
 
 export default function CreateProjectStepOne() {
  
+  const [valid, setValid] = useState(true);
+
   useEffect(()=>{
     setProgress(1);
   },[])
@@ -32,28 +38,38 @@ export default function CreateProjectStepOne() {
     setProjectName,
     projectUrl, 
     setProjectUrl,
-    projectCategory, 
+    projectCategory,  
     setProjectCategory,
     setProgress,
     } = useContext(DataContext)
 
+    function checkValidate(){
+      if (projectName && projectUrl && projectCategory){
+        setValid(true)
+        router.push('/step2')
+      } else {
+        setValid(false)
+      }
+    }
+    
+   
 
   return (
     <StyledMainSectionContainer>
-      <StyledPTitle>To Create Quest you need firstly create Project</StyledPTitle>
-      <StyledH1Title>Add New Project</StyledH1Title>
+      <StyledParagraphTitle>To Create Quest you need firstly create Project</StyledParagraphTitle>
+      <StyledTitle>Add New Project</StyledTitle>
       <label>
-        <StyledP>Project Name (It can be changed later)</StyledP>
+        <StyledParagraph>Project Name (It can be changed later)</StyledParagraph>
         <StyledInputText
           required
           type='text'
           name={`projectName`}
           value={projectName}
-          onChange={(e)=>setProjectName(e.target.value)}
+          onChange={(e)=>{setProjectName(e.target.value)}}
         />
       </label>
       <label>
-        <StyledP>Project URL (It cannot be changed after creation)</StyledP>
+        <StyledParagraph>Project URL (It cannot be changed after creation)</StyledParagraph>
         <StyledInputText
           required
           type='text'
@@ -63,14 +79,14 @@ export default function CreateProjectStepOne() {
         />
       </label>
       <div>
-        <StyledP>Project Category (It cannot be changed after creation)</StyledP>
-          <StyledRadioButtonsList> 
+        <StyledParagraph>Project Category (It cannot be changed after creation)</StyledParagraph>
+          <StyledRadioButtonsListMain> 
             {
               categories.map((item, i)=>{
                 const checked = projectCategory === item;
                 return (
-                  <StyledRadioButtonsLabelSection1 key={`key-${i}`} htmlFor={i}>
-                  <StyledRadioButtonsSecionInputSection1
+                  <StyledRadioButtonsLabelSectionMain key={`key-${i}`} htmlFor={i}>
+                  <StyledRadioButtonsSecionInputSectionMain
                       id={i}
                       required
                       type="radio" 
@@ -83,18 +99,19 @@ export default function CreateProjectStepOne() {
                   />
                   <span>{item}</span>
                 
-                </StyledRadioButtonsLabelSection1>
+                </StyledRadioButtonsLabelSectionMain>
                 )
               })
             }
-          </StyledRadioButtonsList>
+          </StyledRadioButtonsListMain>
       </div>
       
-       <StyledButtonCreate
-        disabled={projectName && projectUrl && projectCategory ? false : true} 
-        onClick={() => router.push('/step2')}
+       <StyledButtonCreate onClick={() => checkValidate()}
         >Add Project
         </StyledButtonCreate>
+        {
+          !valid && <ErrorMessage/>
+        }
     </StyledMainSectionContainer>
   )
 }

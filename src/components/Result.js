@@ -1,15 +1,14 @@
 import { DataContext } from '@/context/dataContext'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { 
   StyledMainSectionContainer, 
-  StyledPTitle, 
-  StyledH1Title, 
+  StyledParagraphTitle, 
+  StyledTitle, 
   StypelResultText,
 } from '@/style-components/MainSection';
 
 
 export default function Result() {
-
   const {
     projectName, 
     projectUrl, 
@@ -18,30 +17,35 @@ export default function Result() {
     amountOfPeople, 
     projectLaunch, 
     email, 
+    setProgress,
   } = useContext(DataContext)
+
+  useEffect(()=>{
+    setProgress(4);
+  },[])
 
   return (
     <StyledMainSectionContainer>
-        <StyledH1Title>Summary:</StyledH1Title>
-        <StyledPTitle>Project Name:</StyledPTitle>
+        <StyledTitle>Summary:</StyledTitle>
+        <StyledParagraphTitle>Project Name:</StyledParagraphTitle>
         <StypelResultText>{projectName}</StypelResultText>
 
-        <StyledPTitle>Project URL: </StyledPTitle>
+        <StyledParagraphTitle>Project URL: </StyledParagraphTitle>
         <StypelResultText>{projectUrl}</StypelResultText>
 
-        <StyledPTitle>Project Category: </StyledPTitle>
+        <StyledParagraphTitle>Project Category: </StyledParagraphTitle>
         <StypelResultText>{projectCategory}</StypelResultText>
 
-        <StyledPTitle>main goal with AlphaQuest: </StyledPTitle>
+        <StyledParagraphTitle>main goal with AlphaQuest: </StyledParagraphTitle>
         <StypelResultText>{projectGoal}</StypelResultText>
 
-        <StyledPTitle>Workers on the project</StyledPTitle>
+        <StyledParagraphTitle>Workers on the project</StyledParagraphTitle>
         <StypelResultText>{amountOfPeople}</StypelResultText>
 
-        <StyledPTitle>pre or post product launch: </StyledPTitle>
+        <StyledParagraphTitle>pre or post product launch: </StyledParagraphTitle>
         <StypelResultText>{projectLaunch}</StypelResultText>
 
-        <StyledPTitle>Email addrss: </StyledPTitle>
+        <StyledParagraphTitle>Email addrss: </StyledParagraphTitle>
         <StypelResultText>{email}</StypelResultText>
     </StyledMainSectionContainer>
   )

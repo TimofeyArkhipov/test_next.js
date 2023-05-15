@@ -4,7 +4,7 @@ const DataContext = createContext()
 
 export default function DataProvider({children}) {
 
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(1);
     const [projectName, setProjectName] = useState('')
     const [projectUrl, setProjectUrl] = useState('')
     const [projectCategory, setProjectCategory] = useState(null);
@@ -22,8 +22,6 @@ export default function DataProvider({children}) {
       'workers': amountOfPeople,
       'project_Launch': projectLaunch
     }
-
-
 
     return (
         <DataContext.Provider value={{
@@ -43,12 +41,10 @@ export default function DataProvider({children}) {
             setProjectLaunch,
             email, 
             setEmail
-
         }}>
             {children}
         </DataContext.Provider>
       )
-
 }
 
 const DataConsumer = DataContext.Consumer

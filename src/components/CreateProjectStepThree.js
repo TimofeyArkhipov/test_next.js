@@ -1,15 +1,16 @@
 import {useContext, useState, useEffect} from 'react'
 import { useRouter } from 'next/router';
 import { DataContext } from '@/context/dataContext';
+import ErrorMessage from './ErrorMessage';
 import { 
   StyledMainSectionContainer, 
-  StyledPTitle, 
-  StyledH1Title, 
+  StyledParagraphTitle, 
+  StyledTitle, 
   StyledInputText, 
   StyledInputNumber,
-  StyledRadioButtonsList2,
-  StyledRadioButtonsLabelSection2,
-  StyledRadioButtonsSecionInputSection2,
+  StyledRadioButtonsListSecondary,
+  StyledRadioButtonsLabelSectionSecondary,
+  StyledRadioButtonsSecionInputSectionSecondary,
   StyledButtonContainer,
   StyledBackButton,
   StyledButtonContinue,
@@ -20,6 +21,7 @@ import {
 
 export default function CreateProjectStepTwo() {
   const router = useRouter()
+  const [valid, setValid] = useState(true);
   const productLaunch = ['Pre Product', 'Post Product'];
     const {
         amountOfPeople, 
@@ -32,14 +34,22 @@ export default function CreateProjectStepTwo() {
      } = useContext(DataContext);
 
      useEffect(()=>{
-      setProgress(1);
+      setProgress(3);
     },[])
 
+    function checkValidate(){
+      if (amountOfPeople && projectLaunch && email){
+        setValid(true)
+        router.push('/result')
+      } else {
+        setValid(false)
+      }
+    }
 
   return (
     <StyledMainSectionContainer>
-      <StyledPTitle>Create Project</StyledPTitle>     
-      <StyledH1Title>How many full-time workers on the project?</StyledH1Title>
+      <StyledParagraphTitle>Create Project</StyledParagraphTitle>     
+      <StyledTitle>How many full-time workers on the project?</StyledTitle>
       <div>
         <StyledControlButtons onClick={()=> setAmountOfPeople(amountOfPeople > 0 ? amountOfPeople-1 : 0 )}>-</StyledControlButtons>
           <StyledInputNumber onChange={(e)=>setAmountOfPeople(amountOfPeople < 0 ? parseInt(e.target.value) : 1)} type='number' value={amountOfPeople}/>
@@ -47,14 +57,14 @@ export default function CreateProjectStepTwo() {
       </div>
 
       <div>
-        <StyledH1Title>Are you pre or post product launch?</StyledH1Title>
-          <StyledRadioButtonsList2> 
+        <StyledTitle>Are you pre or post product launch?</StyledTitle>
+          <StyledRadioButtonsListSecondary> 
             {
               productLaunch.map((item, i)=>{
                 const checked = projectLaunch === item;
                 return (
-                  <StyledRadioButtonsLabelSection2 key={`kes-${i}`} htmlFor={i}>
-                    <StyledRadioButtonsSecionInputSection2
+                  <StyledRadioButtonsLabelSectionSecondary key={`kes-${i}`} htmlFor={i}>
+                    <StyledRadioButtonsSecionInputSectionSecondary
                         id={i}
                         type="radio" 
                         name={`options-${item}`}
@@ -66,13 +76,13 @@ export default function CreateProjectStepTwo() {
                     />
                     <StyledCustomSpan/>
                     {item}
-                </StyledRadioButtonsLabelSection2>
+                </StyledRadioButtonsLabelSectionSecondary>
                 )
               })
             }
-          </StyledRadioButtonsList2>
+          </StyledRadioButtonsListSecondary>
       </div>
-      <StyledH1Title>Contact email</StyledH1Title>
+      <StyledTitle>Contact email</StyledTitle>
       <StyledInputText 
         onChange={(e)=>setEmail(e.target.value)} 
         type='email'
@@ -81,12 +91,14 @@ export default function CreateProjectStepTwo() {
       <StyledButtonContainer>
         <StyledBackButton onClick={() => router.push('/step2')}>Back</StyledBackButton>
         <StyledButtonContinue 
-          disabled={amountOfPeople && projectLaunch && email ? false : true} 
-          onClick={() => router.push('/result')}
+  
+          onClick={() => checkValidate()}
           >Create project
         </StyledButtonContinue>
       </StyledButtonContainer>
-
+      {
+          !valid && <ErrorMessage/>
+        }
     </StyledMainSectionContainer>
   )
 }

@@ -1,13 +1,14 @@
 import {useContext, useState, useEffect} from 'react'
 import { useRouter } from 'next/router';
 import { DataContext } from '@/context/dataContext';
+import ErrorMessage from './ErrorMessage';
 import { 
   StyledMainSectionContainer, 
-  StyledPTitle, 
-  StyledH1Title, 
-  StyledRadioButtonsList2,
-  StyledRadioButtonsLabelSection2,
-  StyledRadioButtonsSecionInputSection2,
+  StyledParagraphTitle, 
+  StyledTitle, 
+  StyledRadioButtonsListSecondary,
+  StyledRadioButtonsLabelSectionSecondary,
+  StyledRadioButtonsSecionInputSectionSecondary,
   StyledCustomSpan,
   StyledButtonContainer,
   StyledBackButton,
@@ -19,25 +20,34 @@ import {
 export default function CreateProjectStepTwo() {
     const router = useRouter()
     const goals = ['Grow My Community', 'Activate Existing Members', 'Understand My Members', ' Other'];
-
+    const [valid, setValid] = useState(true);
     const { projectGoal, setProjectGoal, setProgress,} = useContext(DataContext);
     
     useEffect(()=>{
-      setProgress(1);
+      setProgress(2);
     },[])
+
+    function checkValidate(){
+      if (projectGoal){
+        setValid(true)
+        router.push('/step3')
+      } else {
+        setValid(false)
+      }
+    }
 
   return (
     <StyledMainSectionContainer>
-      <StyledPTitle>Project Details</StyledPTitle>      
+      <StyledParagraphTitle>Project Details</StyledParagraphTitle>      
       <div>
-        <StyledH1Title>What is your main goal with AlphaQuest?</StyledH1Title>
-          <StyledRadioButtonsList2> 
+        <StyledTitle>What is your main goal with AlphaQuest?</StyledTitle>
+          <StyledRadioButtonsListSecondary> 
             {
               goals.map((item, i)=>{
                 const checked = projectGoal === item;
                 return (
-                  <StyledRadioButtonsLabelSection2 key={`kes-${i}`} htmlFor={i}>
-                    <StyledRadioButtonsSecionInputSection2 
+                  <StyledRadioButtonsLabelSectionSecondary key={`kes-${i}`} htmlFor={i}>
+                    <StyledRadioButtonsSecionInputSectionSecondary 
                         id={i}
                         type="radio" 
                         name={`options-${item}`}
@@ -49,21 +59,22 @@ export default function CreateProjectStepTwo() {
                     />
                      <StyledCustomSpan/>
                     {item}
-                </StyledRadioButtonsLabelSection2>
+                </StyledRadioButtonsLabelSectionSecondary>
                 )
               })
             }
-          </StyledRadioButtonsList2>
+          </StyledRadioButtonsListSecondary>
       </div>
       <StyledButtonContainer>
         <StyledBackButton onClick={() => router.push('/step1')}>Back</StyledBackButton>
         <StyledButtonContinue  
-          disabled={projectGoal ? false : true}  
-          onClick={() => router.push('/step3')}
+          onClick={() => checkValidate()}
           >Continue
         </StyledButtonContinue >
       </StyledButtonContainer>
-      
+      {
+          !valid && <ErrorMessage/>
+        }
     </StyledMainSectionContainer>
   )
 }
