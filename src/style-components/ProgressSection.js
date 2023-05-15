@@ -1,8 +1,7 @@
 import styled, { keyframes } from 'styled-components'
-import bg from '../../src/pics/bg.png'
+
 
 const TitleTextColor = '#2B8CE5';
-const BgButtonColor = '#2B8CE5';
 const RegularTextColor = '#fff';
 
 export const ProgressSection = styled.div`
@@ -12,16 +11,26 @@ export const ProgressSection = styled.div`
     padding-left: 1.6rem;
     display: flex;
     flex-direction: column;
-    background-image: url(${bg});
-    background-size: 100%;
-    background-position: bottom;
+    
+   &::after{
+    content: '';
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    bottom: -10%;
+    background: linear-gradient(280.87deg, #87F696 20.45%, #00FFFF 41.25%, #9C16EF 72.03%, #4200FF 94.43%);
+    opacity: 0.5;
+    filter: blur(32.5px);
+   }
     
     @media (max-width:500px) {
         flex-direction: row;
         border:none;
         justify-content: center;
         width: 100%;
-      
+        &::after{
+            content:none;
+        }
     }
 `
 
